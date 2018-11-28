@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Textures;
+using wk71.src.Scenes;
 
 namespace wk71.scenes
 {
@@ -36,6 +38,13 @@ namespace wk71.scenes
 
             //pretendoTitle = createEntity("pretendo_title");
             //pretendoTitle.addComponent(new pretenDropComponent());
+            Core.startCoroutine(transition());
+        }
+
+        IEnumerator transition()
+        {
+            yield return Coroutine.waitForSeconds(2f);
+            gameManager.Instance.LoadSceneWithTransition(gameManager.Transitions.fade, new titleScene());
         }
     }
 }

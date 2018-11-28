@@ -12,7 +12,6 @@ namespace wk71
     class gameManager
     {
         private static gameManager instance;
-        public int _gameWindow, _gameLane;
         public int currentScene { get; set; }
         public int nextScene { get; set; }
         public bool gameOver = false;
@@ -22,13 +21,11 @@ namespace wk71
         public int volumeLevel, returnVolume;
         public bool audio, pause;
         public float audioVolume = 1.0f;
-        public float sizeModifier = 1f;
 
-        public const int BackGroundRenderLayer = 10;
-        public const int GameRenderLayer = 1;
-        public const int UIRenderLayer = 2;       
-        public const int MenuRenderLayer = 3;
- 
+        //public const int BackGroundRenderLayer = 10;
+        //public const int GameRenderLayer = 1;
+        //public const int UIRenderLayer = 2;       
+        //public const int MenuRenderLayer = 3;
 
         public enum GameScenes
         {
@@ -90,7 +87,6 @@ namespace wk71
             Core.scene = new splashScene();
             Core.pauseOnFocusLost = true;
             Core.debugRenderEnabled = true;
-
             
             audio = true;
             pause = false;
@@ -120,27 +116,30 @@ namespace wk71
             }
         }
 
-       public void LoadSceneWithTransition(Transitions transitionType)
-        {
-            switch (currentScene)
-            {
-                case (int)GameScenes.splashScene:
-                    //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
-                    break;
-                case (int)GameScenes.titleScene:
-                    //Core.startCoroutine(TransitionScene(new gameScene(), transitionType));
-                    break;
-                case (int)GameScenes.gameScene:
-                    //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
-                    break;
-                case (int)GameScenes.menuScene:
-                    //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
-                    break;
-                case (int)GameScenes.gameOverScene:
-                    //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
-                    break;
-            }
-        }
+       public void LoadSceneWithTransition(Transitions transitionType, Scene scene)
+       {
+
+           Core.startCoroutine(TransitionScene(scene, transitionType));
+
+           //switch (currentScene)
+           //{
+           //    case (int)GameScenes.splashScene:
+           //        //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
+           //        break;
+           //    case (int)GameScenes.titleScene:
+           //        //Core.startCoroutine(TransitionScene(new gameScene(), transitionType));
+           //        break;
+           //    case (int)GameScenes.gameScene:
+           //        //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
+           //        break;
+           //    case (int)GameScenes.menuScene:
+           //        //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
+           //        break;
+           //    case (int)GameScenes.gameOverScene:
+           //        //Core.startCoroutine(TransitionScene(new titleScene(), transitionType));
+           //        break;
+           //}
+       }
  
         public string AudioOff()
         {
@@ -215,5 +214,7 @@ namespace wk71
         {
             return returnVolume;
         }
+
+
     }
 }
